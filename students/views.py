@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404,redirect
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Student
@@ -134,6 +135,7 @@ def book_list(request):
     return render(request, 'students/booklist.html', {'books':books})
 
 
+@login_required
 def upload_book(request):
     if request.method == 'POST':
         form = BookForm(request.POST, request.FILES)
@@ -145,4 +147,26 @@ def upload_book(request):
     return render(request, 'students/upload_books.html', {'form':form})
 
 
+def book_detail(request, id):
+    book = Book.objects.get(id = id)
+    return render(request, 'students/book_detail.html', {'book':book})
 
+
+def book_update(request, id):
+    book = get_object_or_404(Book, id=id)
+    form = BookForm(request.POST or None,request.FILES or None, instance=book)
+    if form.is_valid():
+        form.save()
+        return redirect('/students/books')
+    context = {"form": form}
+    return render(request, 'students/book_update.html', context)
+
+
+
+def book_delete(request, id):
+    book = get_object_or_404(Book, id=id)
+    if request.method == 'POST':
+        book.delete()
+        return redirect('/students/books')
+    context = {"book": book}
+    return render(request, 'students/book_confirm_delete.html', context)

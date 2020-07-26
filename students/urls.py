@@ -15,6 +15,9 @@ urlpatterns = [
     path('student/<int:pk>/update/', StudentUpdateView.as_view(), name='student-update'),
     path('student/<int:pk>/delete/', StudentDeleteView.as_view(), name='student-delete'),
     path('books/', views.book_list, name='book_list'),
+    path('books/book_detail/<int:id>/', views.book_detail, name='book_detail'),
+    path('books/<int:id>/update/', views.book_update, name='book-update'),
+    path('books/<int:id>/delete/', views.book_delete, name='book-delete'),
     path('books/upload/', views.upload_book, name='upload_book'),
 
 ]

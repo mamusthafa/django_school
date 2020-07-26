@@ -1,14 +1,14 @@
 {% extends 'students/base.html' %}
 {% block content %}
     <h1>Book List</h1>
-    <a href="{% url 'upload_book' %}" class="btn btn-primary">Upload Book</a>
+    <a href="{% url 'upload_book' %}" class="btn btn-primary">Add Book</a>
     <table class="table table-bordered">
         <thead>
             <tr>
                 <th>Cover</th>
-                <th>Title</th>
+                <th>Book Name</th>
                 <th>Author</th>
-                <th>Download</th>
+                <th>Download Book</th>
             </tr>
         </thead>
         <tbody>
@@ -19,7 +19,7 @@
                     <img src="{{ book.cover.url }}" style="width:100px;">
                 {% endif %}
                 </td>
-                <td>{{ book.title }}</td>
+                <td><a href="{% url 'book_detail' book.id %}">{{ book.title }}</a></td>
                 <td>{{ book.author }}</td>
                 <td>
                 {% if book.pdf %}
