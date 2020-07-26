@@ -1,0 +1,25 @@
+{% extends "students/base.html" %}
+{% block content %}
+    <article class="media content-section">
+       <!--  <img class="rounded-circle article-img" src="{{ student.author.profile.image.url }}"> -->
+        <div class="media-body">
+        <div class="article-metadata">
+            <a class="mr-2" href="#">{{ object.author }}</a>
+            <small class="text-muted">{{ object.date_posted|date:"F d, Y" }}</small>
+            {% if object.author == user %}
+            <div>
+                <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'student-update' object.id %}" >Update</a>
+                <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'student-delete' object.id %}" >Delete</a>
+            </div>
+            {% endif %}
+        </div>
+        <h2 class="article-title">{{ object.firstname }}</h2>
+        <p>Present Class : {{ student.present_class }}</p>
+        <p> Admission No : {{ student.admission_no }}</p>
+        <p> Father Name : {{ student.fathername }}</p>
+        <p> Mobile : {{ student.mobile_no }}</p>
+         <p>Address : {{ student.address }}</p>
+        
+        </div>
+    </article>
+{% endblock content %}

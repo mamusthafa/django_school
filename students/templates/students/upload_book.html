@@ -1,0 +1,10 @@
+{% extends 'students/base.html' %}
+{% load_crispy_forms_tags %}
+{% block content %}
+    <h2>Upload Book</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {{ form | crispy}}
+    <button type="submit" class="btn btn-primary">Upload</button>
+    </form>
+    
+{% endblock %}
