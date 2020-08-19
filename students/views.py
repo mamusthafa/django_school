@@ -152,6 +152,7 @@ def book_detail(request, id):
     return render(request, 'students/book_detail.html', {'book':book})
 
 
+@login_required
 def book_update(request, id):
     book = get_object_or_404(Book, id=id)
     form = BookForm(request.POST or None,request.FILES or None, instance=book)
@@ -163,6 +164,7 @@ def book_update(request, id):
 
 
 
+@login_required
 def book_delete(request, id):
     book = get_object_or_404(Book, id=id)
     if request.method == 'POST':
