@@ -114,6 +114,22 @@
         </div>
       </li>
 
+
+      <!-- Nav Item - Faculty Collapse Menu -->
+      <li class="nav-item active">
+        <a class="nav-link collapsed" href="{% url 'faculty_list' %}" data-toggle="collapse" data-target="#collapseFaculty" aria-expanded="true" aria-controls="collapseFaculty">
+          <i class="fas fa-fw fa-book"></i>
+          <span>Faculties</span>
+        </a>
+        <div id="collapseFaculty" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Books</h6>
+            <a class="collapse-item" href="{% url 'faculty_list' %}">Faculties</a>
+            <a class="collapse-item" href="{% url 'add_faculty' %}">Add Faculty</a>
+          </div>
+        </div>
+      </li>
+
     
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
@@ -337,7 +353,7 @@
           {% block content %}{% endblock %}
         </div>
     
-      </div>
+        
 
 
 
@@ -408,6 +424,8 @@
   <!-- Page level custom scripts -->
   <script src="{% static 'js/demo/chart-area-demo.js' %}"></script>
   <script src="{% static 'js/demo/chart-pie-demo.js' %}"></script>
+
+  
 
 </body>
 

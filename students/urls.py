@@ -2,6 +2,7 @@ from django.urls import path
 from .views import StudentListView, StudentDetailView, StudentCreateView, StudentUpdateView, StudentDeleteView, UserStudentListView, SchoolCreateView, SchoolListView, SchoolDetailView, SchoolUpdateView, SchoolDeleteView
 from . import views
 
+
 urlpatterns = [
     path('', StudentListView.as_view(), name='student-home'),
     path('school_create/', SchoolCreateView.as_view(), name='school-create'),
@@ -14,10 +15,18 @@ urlpatterns = [
     path('student/new/', StudentCreateView.as_view(), name='student-create'),
     path('student/<int:pk>/update/', StudentUpdateView.as_view(), name='student-update'),
     path('student/<int:pk>/delete/', StudentDeleteView.as_view(), name='student-delete'),
+
     path('books/', views.book_list, name='book_list'),
     path('books/book_detail/<int:id>/', views.book_detail, name='book_detail'),
     path('books/<int:id>/update/', views.book_update, name='book-update'),
     path('books/<int:id>/delete/', views.book_delete, name='book-delete'),
     path('books/upload/', views.upload_book, name='upload_book'),
+
+    path('faculty/add_faculty', views.add_faculty, name='add_faculty'),
+    path('faculty/faculty_list/', views.faculty_list, name='faculty_list'),
+    path('faculty/<int:id>/update/', views.faculty_update, name='faculty_update'),
+    path('faculty/faculty_detail/<int:id>/', views.faculty_detail, name='faculty_detail'),
+
+    #path('bar/', view=BarView.as_view(), name='bar'),
 
 ]

@@ -9,7 +9,11 @@ from .models import School
 from .models import Book
 from .forms import SchoolForm
 from .forms import BookForm
+from .forms import FacultyForm
+from .models import Faculty
 from django.core.files.storage import FileSystemStorage
+from .filters import OrderFilter
+#from highcharts.views import HighChartsMultiAxesView, HighChartsPieView,HighChartsSpeedometerView, HighChartsHeatMapView, HighChartsPolarView
 
 
 class StudentListView(ListView):
@@ -172,3 +176,45 @@ def book_delete(request, id):
         return redirect('/students/books')
     context = {"book": book}
     return render(request, 'students/book_confirm_delete.html', context)
+
+
+# Faculty Module Starts here
+@login_required
+def add_faculty(request):
+    if request.method == 'POST':
+        form = FacultyForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('fac_list')
+    else:
+        form = FacultyForm()
+    return render(request, 'students/add_faculty.html', {'form':form})
+
+
+
+def faculty_list(request):
+    faculties = Faculty.objects.all()
+    #filter and search codes starts here
+    myFilter = OrderFilter(request.GET, faculties)
+    faculties = myFilter.qs
+    #filter and search codes ends here
+    context = {'faculties': faculties, 'myFilter':myFilter}
+    return render(request, 'students/faculty_list.html', context)
+
+
+
+@login_required
+def faculty_update(request, id):
+    faculty = get_object_or_404(Faculty, id=id)
+    form = FacultyForm(request.POST or None,request.FILES or None, instance=faculty)
+    if form.is_valid():
+        form.save()
+        return redirect('/students/faculty/faculty_list')
+    context = {"form": form}
+    return render(request, 'students/faculty_update.html', context)
+
+def faculty_detail(request, id):
+    faculty = Faculty.objects.get(id = id)
+    return render(request, 'students/faculty_details.html', {'faculty':faculty})
+
+

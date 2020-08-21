@@ -1,0 +1,48 @@
+{% extends 'students/base.html' %}
+{% block content %}
+<div class="row">
+<div class="col-md-12">
+    <form method="GET">
+       {{myFilter.form}}
+       <button class="btn btn-primary" type="submit">Search</button>
+    </form>
+</div>
+</div>
+<div class="row">
+<div class="col-md-12">
+    <h1>Faculty List</h1>
+    <a href="{% url 'add_faculty' %}" class="btn btn-primary">Add Faculty</a>
+    <table class="table table-bordered">
+        <thead>
+            
+            <tr>
+                <th>Faculty Name</th>
+                <th>Faculty ID</th>
+                <th>Mobile No</th>
+                <th>Department</th>
+                <th>Address</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for faculty in faculties %}
+            <tr>
+                <td><a href="{% url 'faculty_detail' faculty.id %}">{{ faculty.fac_fname }} {{ faculty.fac_lname}}</a></td>
+                <td>{{ faculty.faculty_id }}</td>
+                <td>{{ faculty.mobile_no }}</td>
+                <td>{{ faculty.department }}</td>
+                <td>{{ faculty.address }}</td>
+                <td>
+                {% if faculty.image %}
+                    <img src="{{ faculty.image.url }}" style="width:100px;">
+                {% endif %}
+                </td>
+               
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+</div>
+</div>
+{% endblock content %}
