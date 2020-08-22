@@ -115,7 +115,7 @@ h1{
 	<ul class="dropdown-menu">
 		
 		<li>
-			<a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+			<a href="{% url 'logout' %}" class="dropdown-item" data-toggle="modal" data-target="#logoutModal"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
 		</li>
 	</ul>
 </li>
@@ -238,7 +238,7 @@ h1{
         </div>
       </div>
     </div>
-  </div>
+  </div> 
 
   <!-- Bootstrap core JavaScript-->
   <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
