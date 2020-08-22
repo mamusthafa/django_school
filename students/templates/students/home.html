@@ -44,7 +44,7 @@
           {% if student.author == user %}
               <td>
               <div>
-                  <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'student-update' student.id %}" >Update</a>
+                  <a class="btn btn-primary btn-sm mt-1 mb-1" href="{% url 'student-update' student.id %}" >Update</a>
                   <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'student-delete' student.id %}" >Delete</a>
               </div>
             </td>
