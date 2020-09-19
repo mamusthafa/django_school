@@ -1,0 +1,70 @@
+{% extends "students/base.html" %}
+{% block content %}
+<div class="row">
+<a class="btn btn-primary btn-sm mt-1 mb-1" href="{% url 'post-create' %}" >Add Post</a>
+<div class="col-md-2"></div>
+<div class="col-md-8">
+<h2>All Posts</h2>
+<table class="table table-bordered">
+   <thead>
+       <tr>
+           <th>SL</th>
+           <th>Title</th>
+           <th>Description</th>
+           <th></th>
+       </tr>
+   </thead>
+
+
+   {% for object in object_list %}
+
+   <tr>
+       <td>{{forloop.counter}}</td>
+       <td style="width: 20%;color:blue;"><a href="{% url 'post-detail' object.id %}">{{ object.title|slice:":100" }}</a></td>
+       <td>{{ object.description|slice:":255" }}</td>
+       
+       
+       {% if object.author == user %}
+       <td>
+           <div>
+               <a class="btn btn-primary btn-sm mt-1 mb-1" href="{% url 'post-update' object.id %}">Update</a>
+               <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' object.id %}">Delete</a>
+       </td>
+       {% endif %}
+
+
+   </tr>
+
+    {% endfor %}
+</table>
+
+
+<!--------------------------------- Start of Pagination starts here ----------------------------------------------->
+{% if is_paginated %}
+
+{% if page_obj.has_previous %}
+  <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+  <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+{% endif %}
+
+{% for num in page_obj.paginator.page_range %}
+  {% if page_obj.number == num %}
+    <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+  {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+    <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+  {% endif %}
+{% endfor %}
+
+{% if page_obj.has_next %}
+  <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+  <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+{% endif %}
+
+{% endif %}
+<!---------------------------------End of Pagination starts here ----------------------------------------------->
+
+{% endblock content %}
+
+</div>
+</div>
+</div>

@@ -68,3 +68,16 @@ class Faculty(models.Model):
     def get_absolute_url(self):
         return reverse('faculty_detail',kwargs={'pk':self.pk})
 
+class Post(models.Model):
+    title = models.CharField(max_length=250)
+    description = models.TextField()
+    date_posted = models.DateTimeField(default=timezone.now)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    featured_image = models.ImageField(default='default.jpg', upload_to='postimages')
+
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse('post-detail',kwargs={'pk':self.pk})

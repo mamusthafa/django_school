@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import StudentListView, StudentDetailView, StudentCreateView, StudentUpdateView, StudentDeleteView, UserStudentListView, SchoolCreateView, SchoolListView, SchoolDetailView, SchoolUpdateView, SchoolDeleteView
+from .views import StudentListView, StudentDetailView, StudentCreateView, StudentUpdateView, StudentDeleteView, UserStudentListView, SchoolCreateView, SchoolListView, SchoolDetailView, SchoolUpdateView, SchoolDeleteView, PostCreateView, PostDetailView, PostListView, UserPostListView, PostUpdateView, PostDeleteView
 from . import views
 
 
@@ -26,6 +26,14 @@ urlpatterns = [
     path('faculty/faculty_list/', views.faculty_list, name='faculty_list'),
     path('faculty/<int:id>/update/', views.faculty_update, name='faculty_update'),
     path('faculty/faculty_detail/<int:id>/', views.faculty_detail, name='faculty_detail'),
+
+    path('post_create/', PostCreateView.as_view(), name='post-create'),
+    path('post_detail/<int:pk>/', PostDetailView.as_view(), name='post-detail'),
+    path('post_list/', PostListView.as_view(), name='post-list'),
+    path('post/<str:username>', UserPostListView.as_view(), name='user-posts'),
+    path('post/<int:pk>/update/', PostUpdateView.as_view(), name='post-update'),
+    path('post/<int:pk>/delete/', PostDeleteView.as_view(), name='post-delete'),
+
 
     #path('bar/', view=BarView.as_view(), name='bar'),
 

@@ -115,7 +115,7 @@ h1{
 	<ul class="dropdown-menu">
 		
 		<li>
-			<a href="{% url 'logout' %}" class="dropdown-item" data-toggle="modal" data-target="#logoutModal"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+			<a href="{% url 'logout' %}" class="dropdown-item"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
 		</li>
 	</ul>
 </li>
@@ -157,6 +157,16 @@ h1{
     </ul>
   </li>	
 
+
+  <li>
+    <a href="#" data-toggle="collapse" data-target="#post"><i class="fa fa-bank "></i></i> All Posts <i class="fa fa-fw fa-caret-down"></i></a>
+    <ul id="post" class="collapse">
+      <li><a href="{% url 'post-list' %}"><i class="fa fa-cog"></i> All Posts</a></li>
+      <li><a href="{% url 'post-create' %}"><i class="fa fa-fw fa-plus"></i> Add Post</a> </li>
+    
+    </ul>
+  </li>	
+
   
   <li>
     <a href="#" data-toggle="collapse" data-target="#books"><i class="fa fa-fw fa-book "></i></i> Books <i class="fa fa-fw fa-caret-down"></i></a>
@@ -187,8 +197,7 @@ h1{
 		
 		<div class="container-fluid">
 
-		<div class="row">
-        <div class="col-md-12">
+	
           {% if messages %}
             {% for message in messages %}
               <div class="alert alert-{{ message.tags }}">
@@ -197,9 +206,7 @@ h1{
             {% endfor %}
           {% endif %}
           {% block content %}{% endblock %}
-        </div>
-    
-        </div>
+      
         <!-- /.container-fluid -->
 
       </div>
