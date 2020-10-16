@@ -15,6 +15,11 @@
             {% endif %}
         </div>
         <h2 class="article-title">{{ object.firstname }}</h2>
+        {% if object.image %}
+            <img src="{{ object.image.url }}" alt="{{ object.firstname }}" style="width: 100px;">
+        {% else %}
+            <img src="default.jpg" alt="{{ object.firstname }}" style="width: 50px;">
+        {% endif %}
         <p>Present Class : {{ student.present_class }}</p>
         <p> Admission No : {{ student.admission_no }}</p>
         <p> Father Name : {{ student.fathername }}</p>

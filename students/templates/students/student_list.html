@@ -1,10 +1,11 @@
  {% extends "students/base.html" %}
  {% block content %}
  <div class="row">
-    <a class="btn btn-primary btn-sm mt-1 mb-1" href="{% url 'student-home' %}" >Add Post</a>
     
-    <div class="col-md-12">
-<h2>All Students</h2>
+<div class="col-md-12" style="padding:30px;">
+     
+<h1>All Students</h1>
+<a class="btn btn-primary btn-sm mt-1 mb-1" href="{% url 'student-create' %}" >Add Student</a><br><br>
 <table class="table table-bordered">
     <thead>
         <tr>
@@ -34,10 +35,6 @@
         <td><a href="{{ object.pdf.url }}">Download</a></td>
         {% else %}
         <td><span class="text-muted">No Pdf </span></td>
-        {% endif %} {% if object.image %}
-        <td><img src="{{ object.image.url }}" alt="{{ object.firstname }}" style="width: 100px;"></td>
-        {% else %}
-        <td><img src="default.jpg" alt="{{ object.firstname }}" style="width: 50px;"></td>
         {% endif %} {% if object.author == user %}
         <td>
             <div>
