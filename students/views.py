@@ -16,7 +16,7 @@ from django.core.files.storage import FileSystemStorage
 from .filters import OrderFilter
 
 
-#######################################  Student Section Starts Here ##################################
+# Student Section Starts Here
 class StudentListView(ListView):
     model = Student
     # template_name = 'students/home.html'  # <app>/<model>_<viewtype>.html  = students/student_list.html
@@ -76,7 +76,7 @@ class StudentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
             return True
         return False
 
-#######################################  Student section ends here ##################################
+# Student section ends here ##################################
 
 
 class SchoolCreateView(LoginRequiredMixin, CreateView):
@@ -222,9 +222,7 @@ def faculty_detail(request, id):
     return render(request, 'students/faculty_details.html', {'faculty': faculty})
 
 
-
-################################################ Post Section starts here ##########################################
-
+# Post Section starts here
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post    # <app>/<model>_form.html  = students/post_form.html
     fields = ['title', 'description', 'featured_image']
@@ -254,7 +252,6 @@ class UserPostListView(ListView):
         return Post.objects.filter(author=user).order_by('-date_posted')
 
 
-
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post    # <app>/<model>_form.html  = students/student_form.html
     fields = ['title', 'description', 'featured_image']
@@ -281,7 +278,8 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return False
 
 
-################################################ Post Section ends here ##########################################
+
+
 
 
 

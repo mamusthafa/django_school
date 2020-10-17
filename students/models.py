@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from django.urls import reverse
 
+
 class Student(models.Model):
     firstname = models.CharField(max_length=150)
     fathername = models.CharField(max_length=150)
@@ -15,13 +16,11 @@ class Student(models.Model):
     pdf = models.FileField(upload_to='pdfs', blank=True, null=True)
     image = models.ImageField(default='default.jpg', upload_to='student_photos')
 
-
     def __str__(self):
         return self.firstname
 
     def get_absolute_url(self):
         return reverse('student-detail',kwargs={'pk':self.pk})
-
 
 
 class School(models.Model):
@@ -66,7 +65,8 @@ class Faculty(models.Model):
         return self.fac_fname
 
     def get_absolute_url(self):
-        return reverse('faculty_detail',kwargs={'pk':self.pk})
+        return reverse('faculty_detail', kwargs={'pk':self.pk})
+
 
 class Post(models.Model):
     title = models.CharField(max_length=250)
@@ -74,7 +74,6 @@ class Post(models.Model):
     date_posted = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     featured_image = models.ImageField(default='default.jpg', upload_to='postimages')
-
 
     def __str__(self):
         return self.title
