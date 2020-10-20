@@ -5,7 +5,7 @@
 <div class="col-md-12" style="padding:30px;">
     
 <h1>All Expenses</h1>
-<h3>{{ expensesum }}</h3>
+<h3>Total: {{ expensesum.amount__sum }}</h3>
 <a class="btn btn-primary btn-sm mt-1 mb-1" href="{% url 'expense-create' %}" >Add Expense</a><br><br>
 <table class="table table-bordered">
    <thead>
@@ -24,7 +24,7 @@
    <tr>
        <td>{{forloop.counter}}</td>
        <td><a href="#">{{ expense.title }}</a></td>
-       <td>{{ expense.amount }}</td>
+       <td>&#x20B9; {{ expense.amount }}</td>
        <td>{{ expense.date_posted }} by {{ expense.author }}</td>
        {% if expense.author == user %}
        <td>
@@ -42,27 +42,27 @@
 </table>
 
 
-<!--------------------------------- Start of Pagination starts here ----------------------------------------------->
-{% if is_paginated %}
-
-{% if page_obj.has_previous %}
- <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
- <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
-{% endif %}
-
-{% for num in page_obj.paginator.page_range %}
- {% if page_obj.number == num %}
-   <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
- {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-   <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
- {% endif %}
-{% endfor %}
-
-{% if page_obj.has_next %}
- <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
- <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
-{% endif %}
-
+<!--------------------------------- Start of Pagination for function based views starts here ----------------------------------------------->
+{% if expenses.has_other_pages %}
+  <ul class="pagination">
+    {% if expenses.has_previous %}
+      <li><a href="?page={{ expenses.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in expenses.paginator.page_range %}
+      {% if expenses.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if expenses.has_next %}
+      <li><a href="?page={{ expenses.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
 {% endif %}
 <!---------------------------------End of Pagination starts here ----------------------------------------------->
 

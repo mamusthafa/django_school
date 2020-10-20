@@ -21,16 +21,27 @@ class ExpenseCreateView(LoginRequiredMixin, CreateView):
 
 class ExpenseListView(ListView):
     model = Expense  # <app>/<model>_<viewtype>.html  = students/post_detail.html
-    expensesum = Expense.objects.all().aggregate(Sum('amount'))
     ordering = ['-date_posted']
     paginate_by = 5 
 
 
 def expense_list(request):
     expenses = Expense.objects.all()
-    # filter and search codes starts he
     expensesum = Expense.objects.all().aggregate(Sum('amount'))
-    # filter and search codes ends here
+
+    # pagination code for function based views starts here
+    page = request.GET.get('page', 1)
+    paginator = Paginator(expenses, 5)
+
+    try:
+        expenses = paginator.page(page)
+    except PageNotAnInteger:
+        expenses = paginator.page(1)
+    except EmptyPage:
+        expenses = paginator.page(paginator.num_pages)
+    # Pagination ends here
+
+
     context = {'expenses': expenses, 'expensesum': expensesum}
     return render(request, 'expense/expense_lists.html', context)
 

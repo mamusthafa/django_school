@@ -197,11 +197,12 @@ def add_faculty(request):
 
 def faculty_list(request):
     faculties = Faculty.objects.all()
+    total_faculties = faculties.count()
     # filter and search codes starts here
     myFilter = OrderFilter(request.GET, faculties)
     faculties = myFilter.qs
     # filter and search codes ends here
-    context = {'faculties': faculties, 'myFilter': myFilter}
+    context = {'faculties': faculties, 'myFilter': myFilter, 'total_faculties':total_faculties}
     return render(request, 'students/faculty_list.html', context)
 
 
