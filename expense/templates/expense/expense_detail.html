@@ -4,19 +4,19 @@
        <!--  <img class="rounded-circle article-img" src="{{ student.author.profile.image.url }}"> -->
         <div class="media-body">
         <div class="article-metadata">
-            <a class="mr-2" href="#">{{ object.author }}</a>
-            <small class="text-muted">{{ object.date_posted|date:"F d, Y" }}</small>
-            {% if object.author == user %}
+            <a class="mr-2" href="#">{{ expense.author }}</a>
+            <small class="text-muted">{{ expense.date_posted|date:"F d, Y" }}</small>
+            {% if expense.author == user %}
             <div>
-                <a class="btn btn-primary btn-sm mt-1 mb-1" href="#" >Update</a>
-                <a class="btn btn-danger btn-sm mt-1 mb-1" href="#" >Delete</a>
-                <a class="btn btn-default btn-sm mt-1 mb-1" href="#" >Go Back</a> 
+                <a class="btn btn-primary btn-sm mt-1 mb-1" href="{% url 'expense-update' expense.id %}">Update</a>
+                <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'expense-delete' expense.id %}">Delete</a>
+                <a class="btn btn-default btn-sm mt-1 mb-1" href="{% url 'expense-list' %}" >Go Back</a> 
             </div>
             {% endif %}
         </div>
-        <h2 class="article-title">{{ object.title }}</h2>
-        <p>Expense Amount : {{ object.amount }}</p>
-       <small>Updated on : {{object.date_posted}} by : {{object.author}}</small>
+        <h2 class="article-title">{{ expense.title }}</h2>
+        <p>Expense Amount : {{ expense.amount }}</p>
+       <small>Updated on : {{expense.date_posted}} by : {{expense.author}}</small>
         
         </div>
     </article>

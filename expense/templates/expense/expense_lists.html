@@ -23,14 +23,14 @@
 
    <tr>
        <td>{{forloop.counter}}</td>
-       <td><a href="#">{{ expense.title }}</a></td>
+       <td><a href="{% url 'expense-detail' expense.id %}">{{ expense.title }}</a></td>
        <td>&#x20B9; {{ expense.amount }}</td>
        <td>{{ expense.date_posted }} by {{ expense.author }}</td>
        {% if expense.author == user %}
        <td>
            <div>
-               <a class="btn btn-primary btn-sm mt-1 mb-1" href="#">Update</a>
-               <a class="btn btn-danger btn-sm mt-1 mb-1" href="#">Delete</a>
+            <a class="btn btn-primary btn-sm mt-1 mb-1" href="{% url 'expense-update' expense.id %}">Update</a>
+            <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'expense-delete' expense.id %}">Delete</a>
            </div>
        </td>
        {% endif %}
