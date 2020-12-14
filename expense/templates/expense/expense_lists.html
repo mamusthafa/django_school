@@ -11,7 +11,7 @@
    <thead>
        <tr>
            <th>SL</th>
-           <th>Expense Title</th>
+           <th>Expense Title <br>Date</th>
            <th>Expense Amount</th>
            <th>Updated on</th>
            <th></th>
@@ -23,7 +23,7 @@
 
    <tr>
        <td>{{forloop.counter}}</td>
-       <td><a href="{% url 'expense-detail' expense.id %}">{{ expense.title }}</a></td>
+       <td><a href="{% url 'expense-detail' expense.id %}">{{ expense.title }}</a><br> {{ expense.expense_date }}</td>
        <td>&#x20B9; {{ expense.amount }}</td>
        <td>{{ expense.date_posted }} by {{ expense.author }}</td>
        {% if expense.author == user %}

@@ -6,6 +6,7 @@ from django.urls import reverse
 class Expense(models.Model):
     title = models.CharField(max_length=250)
     amount = models.IntegerField()
+    expense_date = models.DateField(blank=True,null=True)
     date_posted = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE,blank=True,null=True)
 

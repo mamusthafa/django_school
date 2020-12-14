@@ -32,7 +32,7 @@ def expense_list(request):
     expensesum = Expense.objects.all().aggregate(Sum('amount'))
     # pagination code for function based views starts here
     page = request.GET.get('page', 1)
-    paginator = Paginator(expenses, 5)
+    paginator = Paginator(expenses, 10)
 
     try:
         expenses = paginator.page(page)
@@ -40,7 +40,7 @@ def expense_list(request):
         expenses = paginator.page(1)
     except EmptyPage:
         expenses = paginator.page(paginator.num_pages)
-    # Pagination ends here
+    # Pagination ends here 
     context = {'expenses': expenses, 'expensesum': expensesum}
     return render(request, 'expense/expense_lists.html', context)
 
